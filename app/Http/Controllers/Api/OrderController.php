@@ -1,0 +1,104 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\Delivery;
+use App\Models\LoanRequest;
+use App\Models\Notification;
+use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\OrderProduct;
+use App\Models\Product;
+use App\Models\Wallet;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
+class OrderController extends Controller
+{
+    public function newOrder(Request $request){
+        $validator=Validator::make($request->all(),  [
+            'product_id' => 'required|array',
+            'quantities' => 'required|array',
+        ]);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $total_items=count($request->product_id);
+
+        $unit_amount=array();
+        $total_amount=array();
+        $order_amount=0;
+
+        for($i=0; $i<$total_items; $i++){
+            $price=Product::where('id', $request->product_id[$i])->value('amount');
+            $total=$price * $request->quantities[$i];
+            array_push($unit_amount, $price);
+            array_push($total_amount, $total);
+        }
+        
+        foreach($total_amount as $total){
+            $order_amount=$order_amount + $total;
+        }
+
+        $user= Auth::user();
+        $user_wallet=Wallet::where('user_id', $user->id)->get();
+
+        if($user_wallet->balance < $order_amount){
+            return response()->json(["error"=>true,"message"=>"Your Foodbank Balance is insufficient to Proceed with this Order"]);  
+        }
+        else{
+            $user_wallet->balance=$user_wallet - $order_amount;
+            $user_wallet->save();
+        }
+
+
+        $order=Order::create([
+            'user_id'=>$user->id,
+            'amount'=>$order_amount,
+        ]);
+
+        for($i=0; $i<$total_items; $i++){
+            
+            OrderProduct::create([
+                'order_id'=>$order->id,
+                'product_id'=>$request->product_id[$i],
+                'quantity'=>$request->quantities[$i],
+                'unit_amount'=>$unit_amount[$i],
+                'total_amount'=>$total_amount[$i],
+            ]);
+        }
+        Notification::create([
+            'user_id'=>$user->id,
+            'type'=>"New Order",
+            'message'=>"Order received with id ox".$order->id."fb",
+        ]);
+
+       
+
+        return response()->json(["error"=>false,"message"=>"Order has been Placed Successfully"]); 
+    }
+    
+    public function orders(){
+        $user=Auth::user();
+        $orders=Order::where('user_id', $user->id)->get();
+
+        return response()->json(["error"=>false, "orders"=>$orders]); 
+    }
+
+    public function order_products($order_id){
+        $products=OrderProduct::where('order_id', $order_id)->get();
+
+        return response()->json(["error"=>false, "order_products"=>$products]); 
+    }
+    public function getOrderStatus($id){
+        $orderstatus=Delivery::where('order_id', $id)->value('status');
+        if(!$orderstatus){
+            $orderstatus="Pending";
+        }
+        return response()->json(["error"=>false, "order_status"=>$orderstatus]); 
+        
+    }
+    
+}

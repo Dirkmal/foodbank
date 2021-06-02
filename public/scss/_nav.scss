@@ -1,0 +1,225 @@
+body {
+  background: rgba(204, 245, 237, 0.2);
+  position: relative;
+}
+
+.sidenav {
+  height: 100vh;
+  width: 19.666667%;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  box-shadow: 4px 3px 10px rgba(0, 0, 0, 0.08);
+  /* 0 width - change this with JavaScript */
+  /* 0.5 second transition effect to slide in the sidenav */
+}
+.open-nav {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* The navigation menu links */
+.sidenav {
+  overflow-y: auto;
+  button {
+    width: 80%;
+    margin: auto;
+  }
+}
+.sidenav a {
+  padding: 17px 8px 17px 1.2em;
+  text-decoration: none;
+  display: block;
+  transition: 0.3s;
+  font-weight: normal;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: #c2c2c2;
+  display: flex;
+  align-items: center;
+}
+.sidenav a span {
+  padding-left: 0.6em;
+}
+.sidenav .active {
+  background: rgba(36, 179, 71, 0.05);
+  border-left: 4px solid #24b347;
+  color: #24b347;
+}
+.sidenav svg {
+  stroke: #c2c2c2;
+  fill: #c2c2c2;
+  opacity: 0.7;
+}
+.fill {
+  fill: #c2c2c2;
+}
+.sidenav .active svg {
+  stroke: #24b347;
+  fill: #24b347;
+}
+
+.sidenav .active .fill {
+  fill: #24b347;
+}
+
+.sidnav .fill:hover {
+  fill: #24b347;
+}
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #24b347;
+  background: rgba(106, 156, 147, 0.2) !important;
+  border-left: 3px solid #24b347;
+  svg {
+    fill: #24b347;
+    stroke: #24b347;
+  }
+}
+.sidenav .closebtn,
+.open-nav {
+  display: none;
+}
+/* Position and style the close button (top right corner) */
+.link-container {
+  list-style-type: none;
+}
+.link-container .dropdown-menu {
+  position: static !important;
+  transform: none !important;
+  border: none;
+  background: rgba(204, 245, 237, 0.2);
+  float: none;
+}
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+
+.open-nav .iconify {
+  width: 100%;
+  height: 100%;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+  position: absolute !important;
+  background-color: white;
+  border-radius: 5px;
+  border: 0.5px solid lightgray;
+  top: 50px;
+  left: 0;
+  margin-top: -6px;
+  margin-left: -1px;
+  -webkit-border-radius: 0 6px 6px 6px;
+  -moz-border-radius: 0 6px 6px;
+  border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu > a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #ccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+
+.dropdown-submenu:hover > a:after {
+  border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+  float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  -webkit-border-radius: 6px 0 6px 6px;
+  -moz-border-radius: 6px 0 6px 6px;
+  border-radius: 6px 0 6px 6px;
+}
+.dropdown-submenu .dropdown-item::after {
+  display: none;
+}
+.dropdown-submenu .dropdown-item.except::after {
+  display: block;
+  margin-left: 0.5em;
+  color: black;
+}
+@media (max-width: 1024.98px) {
+  .sidenav {
+    width: 25%;
+  }
+}
+@media (max-width: 1023.98px) {
+  .sidenav {
+    width: 0;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 1.5em; /* Place content 60px from the top */
+    transition: 0.5s;
+  }
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  .sidenav .closebtn,
+  .open-nav {
+    display: block;
+  }
+}
+.dropdown-item {
+  padding-left: 3em !important;
+}
+
+@media (max-width: 576.98px) {
+  .sidenav {
+    height: 100%;
+  }
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}

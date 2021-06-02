@@ -1,0 +1,592 @@
+@import "nav";
+@import "normalize";
+@import "variables";
+@import "utilities";
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  color: $darkGray;
+}
+.sidenav::-webkit-scrollbar {
+  width: 0.2em;
+}
+
+.sidenav::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.sidenav::-webkit-scrollbar-thumb {
+  background-color: #00cda7;
+  outline: 1px solid slategrey;
+}
+
+@media (min-width: 1200px) {
+  .col-xl-2 {
+    -ms-flex: 0 0 19.666667%;
+    flex: 0 0 19.666667%;
+    max-width: 19.666667%;
+  }
+  .col-xl-10 {
+    -ms-flex: 0 0 80.333333%;
+    flex: 0 0 80.333333%;
+    max-width: 80.333333%;
+  }
+}
+
+.main-header {
+  background-color: $white;
+  border-radius: 5px;
+}
+.dashboard-title {
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: 0.5px;
+  color: $darkGray;
+}
+
+.main-header {
+  .header-links {
+    a {
+      margin-right: 1.2em;
+      color: $lightGray;
+      &:hover {
+        color: $btnGreen;
+      }
+    }
+    @media (max-width: 768.98px) {
+      a {
+        &:nth-child(2) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  .page-title {
+    h3 {
+      color: $textGreen;
+      font-weight: bold;
+    }
+    small {
+      color: $lightGray;
+    }
+  }
+}
+.wallets {
+  @extend %scrolling-wrapper;
+  .card {
+    width: 280px;
+    height: 150px;
+    display: inline-block;
+    border: 0;
+    box-shadow: 0px 1.21739px 8.52174px -1.21739px rgba(0, 0, 0, 0.11);
+    border-radius: 12.1739px;
+    padding: 2em;
+    color: $white;
+    margin: 0.6em;
+  }
+  .foodbank-wallet-card {
+    background: linear-gradient(
+      257.16deg,
+      #24b347 0.74%,
+      #318d2c 52.64%,
+      #77a916 98.43%
+    );
+  }
+  .loan-wallet-card {
+    background: linear-gradient(
+      257.16deg,
+      $red 0.74%,
+      #822929 52.64%,
+      #bc1717 98.43%
+    );
+  }
+}
+
+.transaction-history {
+  overflow: scroll;
+  max-height: 445px;
+  @extend %card-shadow;
+  border-radius: 10px;
+  color: $lightGray !important;
+  font-weight: 800;
+  @extend %invisible-scrollbar;
+  margin-top: 2em;
+  border: 0;
+  .transaction-title {
+    padding: 2em;
+    font-weight: 800;
+    font-size: 0.8rem;
+  }
+  .table {
+    color: $lightGray !important;
+    font-weight: 700;
+  }
+  @media (max-width: 576.98px) {
+    width: 95%;
+    margin: 1em auto;
+  }
+}
+
+.notifications-card {
+  padding: 1.5em;
+  border: 0;
+  @extend %card-shadow;
+  border-radius: 10px;
+  margin-bottom: 1em;
+  h6 {
+    font-weight: 700;
+    color: $lightGray;
+  }
+  ul {
+    list-style-type: none;
+    height: 280px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    li {
+      padding-top: 1em;
+    }
+  }
+  .notification-title {
+    font-weight: 700;
+    color: $lightGray;
+    margin-bottom: 0;
+  }
+  small {
+    color: $lightGray;
+  }
+  a {
+    text-align: center;
+
+    color: $btnGreen;
+  }
+}
+
+.orders {
+  @extend %card-shadow;
+  border-radius: 10px;
+  border: 0;
+  table {
+    color: $lightGray;
+  }
+  padding: 1em;
+  height: 280px;
+  overflow-y: scroll;
+  @extend %invisible-scrollbar;
+  .canceled {
+    color: $red;
+  }
+  .success {
+    color: $btnGreen;
+  }
+}
+
+.search-form {
+  width: 50%;
+  .search {
+    border: 1px solid #c2c2c2;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding-left: 2em;
+    &::placeholder {
+      letter-spacing: 0;
+    }
+  }
+  @media (max-width: 768.98px) {
+    width: 60%;
+    .search {
+      padding-left: 0.5em;
+      &::placeholder {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.available-items {
+  padding: 2em;
+  max-height: 100vh;
+  @media (max-width: 768.98px) {
+    max-height: 100%;
+    width: 100%;
+  }
+}
+
+.item-card {
+  width: 100%;
+  border: 0;
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.06));
+  .card-img-top {
+    width: 100%;
+    height: 130px;
+    background: #f4fbf6;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    background-size: cover;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      backdrop-filter: blur(8px);
+    }
+  }
+  .card-body {
+    text-align: center;
+    padding: 0;
+
+    p {
+      margin: 0;
+      color: black;
+      font-weight: 700;
+      padding: 0 0.7em;
+    }
+  }
+  .item-button {
+    width: 100%;
+    button {
+      width: 100% !important;
+      border: 0;
+      color: $white;
+      font-weight: 600;
+      background-color: $btnGreen;
+      font-size: 1rem;
+      padding: 0.2em;
+      margin-top: 0.2em;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+.shopping-cart {
+  .shopping-cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    .clear {
+      color: $red;
+      small {
+        margin: 0;
+        letter-spacing: -0.490637px;
+        color: $red;
+      }
+    }
+    h6 {
+      color: $lightGray;
+      font-weight: 800;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.cart-list {
+  li {
+    .cart-img {
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    .cart-detail {
+      p {
+        margin: 0;
+        font-weight: bold;
+        font-size: 0.8rem;
+        color: #000000;
+      }
+      small {
+        color: black;
+      }
+    }
+    .cart-functions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 0.684053px solid #c9c9c9;
+      border-radius: 4px;
+      width: 100%;
+      height: 25.99px;
+      padding: 0 0.3em;
+      .plus,
+      .minus {
+        cursor: pointer;
+      }
+      p {
+        color: black;
+        font-size: 0.6rem;
+      }
+      .input {
+        width: 100%;
+        border: 0;
+        height: 100%;
+        margin: auto;
+        text-align: center;
+        color: black;
+        font-weight: bold;
+        font-size: 0.6rem;
+        margin: auto;
+      }
+    }
+  }
+}
+
+.proceed {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .total {
+    color: black;
+    p {
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    h6 {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #000000;
+    }
+    text-align: left;
+  }
+  .proceed-btn {
+    width: 218px;
+    height: 44px;
+    button {
+      background: $btnGreen;
+      border-radius: 10px;
+      color: $white;
+      border: 0;
+      font-size: 0.8rem;
+      width: 100%;
+      height: 100%;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+    @media (max-width: 576.98px) {
+      width: 150px;
+    }
+  }
+}
+
+.main-cart {
+  ul {
+    height: 60vh;
+  }
+  @media (max-width: 576.98px) {
+    height: 80vh;
+  }
+}
+
+.modify {
+  .modify-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1em;
+  }
+  p {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 17px;
+    color: $lightGray;
+  }
+  h5 {
+    font-size: 0.8rem;
+    line-height: 17px;
+    text-align: right;
+    color: $lightGray;
+    font-weight: 700;
+  }
+  .modify-btn {
+    width: 100;
+    .btn {
+      width: 100%;
+      background: $btnGreen;
+      margin-top: 1em;
+      color: $white;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.order-list {
+  li {
+    font-size: 1rem;
+    line-height: 22px;
+    color: $lightGray;
+  }
+}
+
+.success-card {
+  height: 80vh;
+  padding: 2em;
+  .success-body {
+    width: 75%;
+    margin: auto;
+    text-align: center;
+    .illustrator-img {
+      width: 50%;
+      margin: auto;
+      img {
+        width: 100%;
+      }
+    }
+    .text-body {
+      margin-top: 1em;
+      h1 {
+        font-weight: 800;
+        font-size: 3rem;
+        line-height: 118.8%;
+        letter-spacing: -0.045em;
+        color: $btnGreen;
+      }
+      p {
+        font-weight: normal;
+        font-size: 1rem;
+        line-height: 22px;
+        color: $lightGray;
+      }
+      .back-to-home {
+        width: 100%;
+        .btn {
+          width: 80%;
+          background: $btnGreen;
+          margin-top: 1em;
+          color: $white;
+          font-weight: 600;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+  @media (max-width: 576.98px) {
+    height: 90vh;
+
+    .success-body {
+      width: 100%;
+      .text-body {
+        h1 {
+          font-size: 2rem;
+          padding-bottom: 0.8em;
+        }
+      }
+    }
+  }
+}
+
+//ADMIN STYLES
+
+.stats {
+  @extend %card-shadow;
+  color: $lightGray;
+  h1 {
+    font-weight: normal;
+    line-height: 58px;
+  }
+  p {
+    font-weight: bold;
+    font-size: 0.8rem;
+    line-height: 22px;
+  }
+  @media (max-width: 576.98px) {
+    width: 95%;
+    margin: 1em auto;
+  }
+}
+
+.add-item {
+  a {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  .icon-container {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    margin: 0 auto;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(36, 179, 71, 0.2);
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.admin-table {
+  @media (max-width: 576.98px) {
+    min-width: 500px;
+  }
+}
+
+.admin-orders {
+  max-height: 450px;
+  height: 100%;
+  .table td,
+  .table th {
+    padding: 0.75em 0;
+  }
+  small {
+    color: $textGreen;
+  }
+}
+
+#itemsModal {
+  ul {
+    li {
+      list-style-type: none;
+      margin-top: 1em;
+    }
+  }
+}
+
+.admin-loan-requests {
+  max-height: 250px;
+  .cursor-pointer {
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    text-align: center;
+    font-size: 0.7rem;
+    padding: 0.7em;
+    border-radius: 5px;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.border-red {
+  border: 1px solid $red;
+}
+
+.admin-store {
+  .item-card .item-button button {
+    background: $red;
+  }
+}
+.add-button-container {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  button {
+    border: 0;
+    width: 100%;
+    padding: 0.5em;
+  }
+}
